@@ -1,7 +1,7 @@
 package classes;
 
 public class CalculoPeso {
-    public double pesoIdeal(String sexo, float altura) {
+    public double pesoIdeal(String sexo, double altura) {
         double pesoIdeal;
         if (sexo.equals("Masculino")) {
             pesoIdeal = (72.7 * altura - 58);
@@ -12,7 +12,7 @@ public class CalculoPeso {
         }
     }
 
-    public double porcent(double pesoIdeal, double peso) {
+    public double porcentagemDoPesoIdeal(double pesoIdeal, double peso) {
         double porcent;
         porcent = (1 - pesoIdeal / peso) * 100;
         return porcent;

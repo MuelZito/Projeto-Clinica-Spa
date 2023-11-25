@@ -1,23 +1,30 @@
 package classes;
 
-import com.sun.source.tree.NewArrayTree;
 import interfaces.Atividade;
 
-import java.util.function.DoublePredicate;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Emagrecimento extends Paciente implements Atividade {
-    CalculoPeso pesoIdeal = new CalculoPeso();
     private double peso;
+    private double altura;
+    private double pesoIdeal;
+    private double porcentagemPesoIdeal;
+    private CalculoPeso calculoPeso;
+    private Set<Paciente> emagrecimento = new HashSet<>();
 
-    public Emagrecimento(String nome, String sexo, String telefone, String tipoAtividade,double peso,CalculoPeso pesoIdeal) {
+
+    public Emagrecimento(String nome, String sexo, String telefone, String tipoAtividade, double peso, double altura, CalculoPeso calculoPeso) {
         super(nome, sexo, telefone, tipoAtividade);
         this.peso = peso;
-        this.pesoIdeal = pesoIdeal;
+        this.altura = altura;
+        this.calculoPeso = calculoPeso;
+        this.pesoIdeal = calculoPeso.pesoIdeal(sexo, altura);
     }
 
     @Override
     public String mostrarDados() {
-        return null;
+      return null;
     }
 
     @Override
