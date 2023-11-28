@@ -1,18 +1,22 @@
 package tela;
 
+import classes.Paciente;
 import paineis.PainelEmagrecimento;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TelaSpa extends JFrame {
     private JMenuBar jbBarra;
     private JMenu jmOpçoes;
-    private JMenuItem jmiCadastrar,jmiPesquisar,jmiAlterar,jmiRemover,jmiP_emagrecimento,jmiP_estetica;
+    private JMenuItem jmiCadastrar, jmiPesquisar, jmiAlterar, jmiRemover, jmiP_emagrecimento, jmiP_estetica;
     private ImageIcon image;
     private JLabel jlimage;
+    public static Set<Paciente> pacientes = new HashSet<>();
 
     public TelaSpa(String title) throws HeadlessException {
         super(title);
@@ -42,7 +46,6 @@ public class TelaSpa extends JFrame {
         jmOpçoes.add(jmiRemover);
         jmiCadastrar.add(jmiP_emagrecimento);
         jmiCadastrar.add(jmiP_estetica);
-
 
 
         //Colocar Background
