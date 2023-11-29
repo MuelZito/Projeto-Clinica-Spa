@@ -14,19 +14,23 @@ public class Emagrecimento extends Paciente implements Atividade {
     private Set<Paciente> emagrecimento = new HashSet<>();
 
 
-    public Emagrecimento(String nome, String sexo, String telefone, String tipoAtividade, double peso, double altura) {
+    public Emagrecimento(String nome, String sexo, String telefone, String tipoAtividade, double peso, double altura, CalculoPeso calculoPeso) {
         super(nome, sexo, telefone, tipoAtividade);
         this.peso = peso;
         this.altura = altura;
-//        this.calculoPeso = calculoPeso;
-//        this.pesoIdeal = calculoPeso.pesoIdeal(sexo, altura);
+        this.calculoPeso = calculoPeso;
+        this.pesoIdeal = calculoPeso.pesoIdeal(this.sexo, this.altura);
     }
+
+
+
 
     @Override
     public String mostrarDados() {
 
         return "Nome " + this.nome + "\nSexo " + this.sexo + "\nTelefone " + this.telefone +
-                "\nAtividade " + this.TipoAtividade + "\nPeso " + this.peso + " Kg" + "\nAltura" + this.altura + " m" ;
+                "\nAtividade " + this.TipoAtividade + "\nPeso " + this.peso + " Kg" + "\nAltura " + this.altura + " m"
+                + "\nPeso ideal " + this.pesoIdeal + " Kg";
     }
 
     @Override

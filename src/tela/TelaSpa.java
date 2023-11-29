@@ -1,7 +1,10 @@
 package tela;
 
+import classes.CalculoPeso;
 import classes.Paciente;
 import paineis.PainelEmagrecimento;
+import paineis.PainelEstetica;
+import paineis.PainelMostrar;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +19,7 @@ public class TelaSpa extends JFrame {
     private JMenuItem jmiCadastrar, jmiPesquisar, jmiAlterar, jmiRemover, jmiP_emagrecimento, jmiP_estetica;
     private ImageIcon image;
     private JLabel jlimage;
+    private CalculoPeso calculoPeso;
     public static Set<Paciente> pacientes = new HashSet<>();
 
     public TelaSpa(String title) throws HeadlessException {
@@ -25,6 +29,7 @@ public class TelaSpa extends JFrame {
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setLocationRelativeTo(getContentPane());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        calculoPeso = new CalculoPeso();
         iniciarComponentes();
         criarEventos();
     }
@@ -60,12 +65,32 @@ public class TelaSpa extends JFrame {
         jmiP_emagrecimento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PainelEmagrecimento emagrecimento = new PainelEmagrecimento();
+                PainelEmagrecimento emagrecimento = new PainelEmagrecimento(calculoPeso);
                 getContentPane().removeAll();
                 getContentPane().add(emagrecimento);
                 getContentPane().validate();
                 getContentPane().repaint();
 
+            }
+        });
+        jmiP_estetica.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PainelEstetica estetica = new PainelEstetica();
+                getContentPane().removeAll();
+                getContentPane().add(estetica);
+                getContentPane().validate();
+                getContentPane().repaint();
+            }
+        });
+        jmiPesquisar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PainelMostrar mostrar = new PainelMostrar();
+                getContentPane().removeAll();
+                getContentPane().add(mostrar);
+                getContentPane().validate();
+                getContentPane().repaint();
             }
         });
     }

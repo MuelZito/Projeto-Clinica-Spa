@@ -1,7 +1,6 @@
 package paineis;
 
-import classes.CalculoPeso;
-import classes.Emagrecimento;
+import classes.Estetica;
 import tela.TelaSpa;
 
 import javax.swing.*;
@@ -11,41 +10,32 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 
-public class PainelEmagrecimento extends JPanel {
-    private JLabel jlNome, jlSexo, jlTelefone, jlPeso, jlAltura,jlAtividade;
+public class PainelEstetica extends JPanel {
+    private JLabel jlNome, jlTelefone, jlSexo, jlServicos;
     private JTextField jtfNome;
-    private JFormattedTextField jftTelefone,jtfPeso, jtfAltura;
+    private JFormattedTextField jftTelefone;
     private JRadioButton rbMasculino, rbFeminino;
     private ButtonGroup bgGenero;
     private Button btCadastrar;
-    CalculoPeso calculoPeso = new CalculoPeso();
-    private JComboBox<String> comboAtividade = new JComboBox<>();
+    private JComboBox<String> comboServicos = new JComboBox<>();
     private Font font = font = new Font(Font.SANS_SERIF, Font.BOLD, 15);
 
-    public PainelEmagrecimento(CalculoPeso calculoPeso) {
+    public PainelEstetica() {
         setSize(550, 550);
         setLayout(null);
-        this.calculoPeso = calculoPeso;
-        Color cor = new Color(0x91A8D0);
+        Color cor = new Color(0x6495ED);
         setBackground(cor);
         iniciarComponentes();
         criarEventos();
-
     }
 
     private void iniciarComponentes() {
-
         MaskFormatter mascara = new MaskFormatter();
-        MaskFormatter mascaraPeso = new MaskFormatter();
-        MaskFormatter mascaraAltura = new MaskFormatter();
         try {
             mascara.setMask("(##)#####-####");
-            mascaraPeso.setMask("##.## Kg");
-            mascaraAltura.setMask("#.## m");
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-
 
         jlNome = new JLabel("Nome");
         jlNome.setFont(font);
@@ -58,19 +48,13 @@ public class PainelEmagrecimento extends JPanel {
         rbFeminino.setFont(font);
         rbFeminino.setOpaque(false);
         bgGenero = new ButtonGroup();
+        jtfNome = new JTextField();
         jlTelefone = new JLabel("Telefone");
         jlTelefone.setFont(font);
-        jlPeso = new JLabel("Peso");
-        jlPeso.setFont(font);
-        jtfNome = new JTextField();
-        jtfPeso = new JFormattedTextField();
         jftTelefone = new JFormattedTextField(mascara);
-        jlAltura = new JLabel("Altura");
-        jlAltura.setFont(font);
-        jtfAltura = new JFormattedTextField();
-        jlAtividade = new JLabel("Atividades");
-        jlAtividade.setFont(font);
-        comboAtividade = new JComboBox<>();
+        jlServicos = new JLabel("Serviços");
+        jlServicos.setFont(font);
+        comboServicos = new JComboBox<>();
         btCadastrar = new Button("Cadastrar");
         btCadastrar.setFont(font);
 
@@ -84,15 +68,13 @@ public class PainelEmagrecimento extends JPanel {
         bgGenero.add(rbFeminino);
         add(jlTelefone);
         add(jftTelefone);
-        add(jlPeso);
-        add(jtfPeso);
-        add(jlAltura);
-        add(jtfAltura);
-        add(jlAtividade);
-        add(comboAtividade);
-        comboAtividade.addItem("Caminhada no Bosque");
-        comboAtividade.addItem("Nadar na Piscina");
-        comboAtividade.addItem("Academia");
+        add(jlServicos);
+        add(comboServicos);
+        comboServicos.addItem("Hidratação de pés e mãos");
+        comboServicos.addItem("Banho de lua");
+        comboServicos.addItem("Limpeza de Pele");
+        comboServicos.addItem("Cuidar do Cabelo");
+        comboServicos.addItem("Massagem Esfoliante");
         add(btCadastrar);
 
 
@@ -100,16 +82,12 @@ public class PainelEmagrecimento extends JPanel {
         jtfNome.setBounds(60, 105, 150, 20);
         jlTelefone.setBounds(60, 140, 100, 20);
         jftTelefone.setBounds(60, 165, 150, 20);
-        jlPeso.setBounds(60, 205, 100, 20);
-        jtfPeso.setBounds(60, 225, 150, 20);
-        jlAltura.setBounds(60, 265, 100, 20);
-        jtfAltura.setBounds(60, 285, 150, 20);
-        jlAtividade.setBounds(350,180,100,20);
-        comboAtividade.setBounds(350,210,170,20);
+        jlServicos.setBounds(60, 200, 100, 20);
+        comboServicos.setBounds(60, 220, 170, 20);
         jlSexo.setBounds(350, 80, 100, 20);
         rbMasculino.setBounds(350, 110, 100, 20);
         rbFeminino.setBounds(350, 140, 100, 20);
-        btCadastrar.setBounds(210,370,150,30);
+        btCadastrar.setBounds(210, 370, 150, 30);
 
     }
 
@@ -118,24 +96,20 @@ public class PainelEmagrecimento extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nome = jtfNome.getText();
-                String telefone = jftTelefone.getText();
                 String sexo = null;
-                double peso = Double.parseDouble(jtfPeso.getText());
-                double altura = Double.parseDouble(jtfAltura.getText());
-                nome = jtfNome.getText();
-                String tipoAtividade = (String) comboAtividade.getSelectedItem();
+                String telefone = jftTelefone.getText();
+                String servico =  (String) comboServicos.getSelectedItem();
 
                 if (rbMasculino.isSelected()){
                     sexo = "Masculino";
-                }else if (rbFeminino.isSelected()){
-                    sexo = "Feminino";
+                }else {
+                    sexo = "Feminio";
                 }
 
+                TelaSpa.pacientes.add(new Estetica(nome,sexo,telefone,servico));
+                TelaSpa.pacientes.forEach(estetica -> System.out.println(estetica.mostrarDados()));
 
-                    TelaSpa.pacientes.add(new Emagrecimento(nome,sexo,telefone,tipoAtividade,peso,altura,calculoPeso));
-                    TelaSpa.pacientes.forEach(emagrecimento-> System.out.println(emagrecimento.mostrarDados() + "\n"));
-
-                }
+            }
         });
 
     }
