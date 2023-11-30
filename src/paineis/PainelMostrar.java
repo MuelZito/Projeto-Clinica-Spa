@@ -1,12 +1,22 @@
 package paineis;
 
+import classes.Emagrecimento;
+import classes.Estetica;
+import classes.Paciente;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Set;
+
+import static tela.TelaSpa.pacientes;
 
 public class PainelMostrar extends JPanel {
     private JTextArea jtaCampo;
-    private JButton btMostra;
-    public PainelMostrar() {
+    private JButton btMostraEstetica, btMostrarEmagrecimento;
+
+    public PainelMostrar(Set<Paciente> pacientes) {
         setSize(550, 550);
         setLayout(null);
         Color cor = new Color(0x6495ED);
@@ -17,18 +27,40 @@ public class PainelMostrar extends JPanel {
 
     private void iniciarComponentes() {
         jtaCampo = new JTextArea();
-        btMostra = new JButton("Mostrar");
+        btMostraEstetica = new JButton("Estética");
+        btMostrarEmagrecimento = new JButton("Emagrecimento");
 
         add(jtaCampo);
-        add(btMostra);
+        add(btMostraEstetica);
+        add(btMostrarEmagrecimento);
 
-        jtaCampo.setBounds(90,40,350,300);
-        btMostra.setBounds(215,330,100,25);
+        jtaCampo.setBounds(90, 40, 350, 300);
+        btMostraEstetica.setBounds(150, 350, 100, 25);
+        btMostrarEmagrecimento.setBounds(270,350,125,25);
 
 
     }
 
     private void criarEventos() {
-
+        btMostraEstetica.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (Paciente paciente : pacientes) {
+                    if (paciente instanceof Estetica) {
+                        jtaCampo.append(paciente.mostrarDados() + "\n**************************************" + "\n");
+                    }
+                }
+            }
+        });
+        btMostrarEmagrecimento.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (Paciente paciente: pacientes) {
+                    if (paciente instanceof Emagrecimento){
+                        jtaCampo.append(paciente.mostrarDados());
+                    }
+                }
+            }
+        });
     }
 }

@@ -15,4 +15,36 @@ public class Paciente {
     public String mostrarDados(){
         return null;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getTipoAtividade() {
+        return TipoAtividade;
+    }
+
+    public void setTipoAtividade(String tipoAtividade) {
+        TipoAtividade = tipoAtividade;
+    }
 }

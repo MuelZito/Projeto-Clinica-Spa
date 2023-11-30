@@ -1,6 +1,7 @@
 package paineis;
 
 import classes.Estetica;
+import classes.Paciente;
 import tela.TelaSpa;
 
 import javax.swing.*;
@@ -107,9 +108,19 @@ public class PainelEstetica extends JPanel {
                 }
 
                 TelaSpa.pacientes.add(new Estetica(nome,sexo,telefone,servico));
-                TelaSpa.pacientes.forEach(estetica -> System.out.println(estetica.mostrarDados()));
-
-            }
+                //TelaSpa.pacientes.forEach(estetica -> System.out.println(estetica.mostrarDados()));
+//
+//                String nomeDigitado = JOptionPane.showInputDialog("DIGITE o nome para deletar");
+//                Boolean achou = false;
+//                for (Paciente paci:TelaSpa.pacientes) {
+//                    if (paci.getNome().equals(nomeDigitado)){
+//                        TelaSpa.pacientes.remove(paci);
+//                        achou = true;
+//                        JOptionPane.showMessageDialog(null,"REMOVIDO");
+//                    }
+//                }
+//                if (!achou)JOptionPane.showMessageDialog(null,"NAO ACHOU");
+     }
         });
 
     }

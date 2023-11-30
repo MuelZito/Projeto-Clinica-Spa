@@ -133,7 +133,7 @@ public class PainelEmagrecimento extends JPanel {
 
 
                     TelaSpa.pacientes.add(new Emagrecimento(nome,sexo,telefone,tipoAtividade,peso,altura,calculoPeso));
-                    TelaSpa.pacientes.forEach(emagrecimento-> System.out.println(emagrecimento.mostrarDados() + "\n"));
+                    //TelaSpa.pacientes.forEach(emagrecimento-> System.out.println(emagrecimento.mostrarDados() + "\n"));
 
                 }
         });

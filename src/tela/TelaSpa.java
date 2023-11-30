@@ -15,8 +15,8 @@ import java.util.Set;
 
 public class TelaSpa extends JFrame {
     private JMenuBar jbBarra;
-    private JMenu jmOpçoes;
-    private JMenuItem jmiCadastrar, jmiPesquisar, jmiAlterar, jmiRemover, jmiP_emagrecimento, jmiP_estetica;
+    private JMenu jmOpçoes, jmCadastrar;
+    private JMenuItem jmiPesquisar, jmiMostrar, jmiAlterar, jmiRemover, jmiP_emagrecimento, jmiP_estetica;
     private ImageIcon image;
     private JLabel jlimage;
     private CalculoPeso calculoPeso;
@@ -37,20 +37,23 @@ public class TelaSpa extends JFrame {
     private void iniciarComponentes() {
         jbBarra = new JMenuBar();
         setJMenuBar(jbBarra);
-        jmiCadastrar = new JMenu("Cadastrar");
+        jmCadastrar = new JMenu("Cadastrar");
         jmiPesquisar = new JMenuItem("Pesquisar");
+        jmiMostrar = new JMenuItem("Mostrar");
         jmiAlterar = new JMenuItem("Alterar");
         jmiRemover = new JMenuItem("Remover");
         jmOpçoes = new JMenu("Opções");
         jmiP_emagrecimento = new JMenuItem("Paciente Emagrecimento");
         jmiP_estetica = new JMenuItem("Paciente Estética");
         jbBarra.add(jmOpçoes);
-        jmOpçoes.add(jmiCadastrar);
+        jbBarra
+                .add(jmCadastrar);
         jmOpçoes.add(jmiPesquisar);
+        jmOpçoes.add(jmiMostrar);
         jmOpçoes.add(jmiAlterar);
         jmOpçoes.add(jmiRemover);
-        jmiCadastrar.add(jmiP_emagrecimento);
-        jmiCadastrar.add(jmiP_estetica);
+        jmCadastrar.add(jmiP_emagrecimento);
+        jmCadastrar.add(jmiP_estetica);
 
 
         //Colocar Background
@@ -83,22 +86,37 @@ public class TelaSpa extends JFrame {
                 getContentPane().repaint();
             }
         });
-        jmiPesquisar.addActionListener(new ActionListener() {
+        jmiMostrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PainelMostrar mostrar = new PainelMostrar();
+                PainelMostrar mostrar = new PainelMostrar(pacientes);
                 getContentPane().removeAll();
                 getContentPane().add(mostrar);
                 getContentPane().validate();
                 getContentPane().repaint();
             }
         });
+        jmiRemover.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String nomeDigitado = JOptionPane.showInputDialog("DIGITE o nome para deletar");
+                Boolean achou = false;
+                for (Paciente paci : TelaSpa.pacientes) {
+                    if (paci.getNome().equals(nomeDigitado)) {
+                        TelaSpa.pacientes.remove(paci);
+                        achou = true;
+                        JOptionPane.showMessageDialog(null, "REMOVIDO");
+                    }
+                }
+                if (!achou) JOptionPane.showMessageDialog(null, "NAO ACHOU");
+            }
+        });
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            TelaSpa spa = new TelaSpa("SPA-LA-LA");
-            spa.setVisible(true);
-        });
+        TelaSpa spa = new TelaSpa("SPA-LA-LA");
+        spa.setVisible(true);
+
     }
 }
