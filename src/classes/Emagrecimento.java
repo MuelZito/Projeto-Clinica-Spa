@@ -20,6 +20,7 @@ public class Emagrecimento extends Paciente implements Atividade {
         this.altura = altura;
         this.calculoPeso = calculoPeso;
         this.pesoIdeal = calculoPeso.pesoIdeal(this.sexo, this.altura);
+        this.porcentagemPesoIdeal = calculoPeso.porcentagemDoPesoIdeal(this.pesoIdeal,this.peso);
     }
 
 
@@ -30,7 +31,7 @@ public class Emagrecimento extends Paciente implements Atividade {
 
         return "Nome " + this.nome + "\nSexo " + this.sexo + "\nTelefone " + this.telefone +
                 "\nAtividade " + this.TipoAtividade + "\nPeso " + this.peso + " Kg" + "\nAltura " + this.altura + " m"
-                + "\nPeso ideal " + this.pesoIdeal + " Kg";
+                + "\nPeso ideal " + this.pesoIdeal + " Kg" + "\nPorcentagem Peso: " + this.porcentagemPesoIdeal + "%";
     }
 
     @Override

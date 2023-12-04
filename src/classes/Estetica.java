@@ -13,4 +13,9 @@ public class Estetica extends Paciente{
         return "Nome " + this.nome + "\nSexo " + this.sexo + "\nTelefone " + this.telefone +
                 "\nServico " + this.TipoAtividade;
     }
+
+    public void servicos(String servico1){}
+    public void servicos(String servico1,String servico2){}
+    public void servicos(String servico,String servico2,String sevico3){}
+
 }

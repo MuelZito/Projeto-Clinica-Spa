@@ -16,7 +16,7 @@ public class PainelMostrar extends JPanel {
     private JTextArea jtaCampo;
     private JButton btMostraEstetica, btMostrarEmagrecimento;
 
-    public PainelMostrar(Set<Paciente> pacientes) {
+    public PainelMostrar() {
         setSize(550, 550);
         setLayout(null);
         Color cor = new Color(0x6495ED);
@@ -45,9 +45,11 @@ public class PainelMostrar extends JPanel {
         btMostraEstetica.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                jtaCampo.setText("**************************ESTÉTICA***************************" + "\n");
+
                 for (Paciente paciente : pacientes) {
                     if (paciente instanceof Estetica) {
-                        jtaCampo.append(paciente.mostrarDados() + "\n**************************************" + "\n");
+                        jtaCampo.append(paciente.mostrarDados());
                     }
                 }
             }
@@ -55,6 +57,8 @@ public class PainelMostrar extends JPanel {
         btMostrarEmagrecimento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                jtaCampo.setText("************************EMAGRECIMENTO************************" + "\n");
                 for (Paciente paciente: pacientes) {
                     if (paciente instanceof Emagrecimento){
                         jtaCampo.append(paciente.mostrarDados());

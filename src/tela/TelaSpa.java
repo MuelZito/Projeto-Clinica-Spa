@@ -89,7 +89,7 @@ public class TelaSpa extends JFrame {
         jmiMostrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PainelMostrar mostrar = new PainelMostrar(pacientes);
+                PainelMostrar mostrar = new PainelMostrar();
                 getContentPane().removeAll();
                 getContentPane().add(mostrar);
                 getContentPane().validate();
@@ -100,16 +100,34 @@ public class TelaSpa extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String nomeDigitado = JOptionPane.showInputDialog("DIGITE o nome para deletar");
+                String nomeDeletado = JOptionPane.showInputDialog("DIGITE o nome para deletar");
                 Boolean achou = false;
-                for (Paciente paci : TelaSpa.pacientes) {
-                    if (paci.getNome().equals(nomeDigitado)) {
-                        TelaSpa.pacientes.remove(paci);
+                for (Paciente paciente : pacientes) {
+                    if (paciente.getNome().equals(nomeDeletado)) {
+                        pacientes.remove(paciente);
                         achou = true;
                         JOptionPane.showMessageDialog(null, "REMOVIDO");
                     }
                 }
                 if (!achou) JOptionPane.showMessageDialog(null, "NAO ACHOU");
+            }
+        });
+        jmiPesquisar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nomePesquisado = JOptionPane.showInputDialog("Digite o nome a ser pesquisado");
+                for (Paciente paciente: pacientes){
+                    if (paciente.getNome().equals(nomePesquisado)){
+                        System.out.println("acho" + paciente.mostrarDados());
+                    }
+                }
+            }
+        });
+        jmiAlterar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
             }
         });
     }
