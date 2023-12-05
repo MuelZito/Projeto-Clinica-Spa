@@ -12,7 +12,8 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 
 public class PainelEstetica extends JPanel {
-    private JLabel jlNome, jlTelefone, jlSexo, jlServicos;
+    private JLabel jlimage,jlNome, jlTelefone, jlSexo, jlServicos;
+    private ImageIcon image;
     private JTextField jtfNome;
     private JFormattedTextField jftTelefone;
     private JRadioButton rbMasculino, rbFeminino;
@@ -40,21 +41,35 @@ public class PainelEstetica extends JPanel {
 
         jlNome = new JLabel("Nome");
         jlNome.setFont(font);
+        jlNome.setForeground(Color.WHITE);
+
         jlSexo = new JLabel("Sexo");
         jlSexo.setFont(font);
+        jlSexo.setForeground(Color.WHITE);
+
         rbMasculino = new JRadioButton("Masculino");
         rbMasculino.setOpaque(false);
         rbMasculino.setFont(font);
+        rbMasculino.setForeground(Color.WHITE); // Se aplicável, ajuste a cor do texto dos radio buttons
+
         rbFeminino = new JRadioButton("Feminino");
         rbFeminino.setFont(font);
         rbFeminino.setOpaque(false);
+        rbFeminino.setForeground(Color.WHITE); // Se aplicável, ajuste a cor do texto dos radio buttons
+
         bgGenero = new ButtonGroup();
         jtfNome = new JTextField();
+
         jlTelefone = new JLabel("Telefone");
         jlTelefone.setFont(font);
+        jlTelefone.setForeground(Color.WHITE);
+
         jftTelefone = new JFormattedTextField(mascara);
+
         jlServicos = new JLabel("Serviços");
         jlServicos.setFont(font);
+        jlServicos.setForeground(Color.WHITE);
+
         comboServicos = new JComboBox<>();
         btCadastrar = new Button("Cadastrar");
         btCadastrar.setFont(font);
@@ -89,6 +104,13 @@ public class PainelEstetica extends JPanel {
         rbMasculino.setBounds(350, 110, 100, 20);
         rbFeminino.setBounds(350, 140, 100, 20);
         btCadastrar.setBounds(210, 370, 150, 30);
+
+
+        //Colocando img
+        image = new ImageIcon(getClass().getResource("/img/background2.png"));
+        jlimage = new JLabel(image);
+        add(jlimage);
+        jlimage.setBounds(0,0,550,550);
 
     }
 

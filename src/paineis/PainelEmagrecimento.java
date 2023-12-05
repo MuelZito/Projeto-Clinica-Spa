@@ -12,20 +12,20 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 
 public class PainelEmagrecimento extends JPanel {
-    private JLabel jlNome, jlSexo, jlTelefone, jlPeso, jlAltura,jlAtividade;
+    private JLabel jlimage, jlNome, jlSexo, jlTelefone, jlPeso, jlAltura, jlAtividade;
+    private ImageIcon image;
     private JTextField jtfNome;
-    private JFormattedTextField jftTelefone,jtfPeso, jtfAltura;
+    private JFormattedTextField jftTelefone, jtfPeso, jtfAltura;
     private JRadioButton rbMasculino, rbFeminino;
     private ButtonGroup bgGenero;
     private Button btCadastrar;
-    CalculoPeso calculoPeso = new CalculoPeso();
     private JComboBox<String> comboAtividade = new JComboBox<>();
-    private Font font = font = new Font(Font.SANS_SERIF, Font.BOLD, 15);
+    private Font font = new Font(Font.SANS_SERIF, Font.BOLD, 15);
+    CalculoPeso calculoPeso = new CalculoPeso();
 
-    public PainelEmagrecimento(CalculoPeso calculoPeso) {
+    public PainelEmagrecimento() {
         setSize(550, 550);
         setLayout(null);
-        this.calculoPeso = calculoPeso;
         Color cor = new Color(0x91A8D0);
         setBackground(cor);
         iniciarComponentes();
@@ -46,33 +46,55 @@ public class PainelEmagrecimento extends JPanel {
             throw new RuntimeException(e);
         }
 
-
         jlNome = new JLabel("Nome");
         jlNome.setFont(font);
+        jlNome.setForeground(Color.WHITE);
+
         jlSexo = new JLabel("Sexo");
         jlSexo.setFont(font);
+        jlSexo.setForeground(Color.WHITE);
+
         rbMasculino = new JRadioButton("Masculino");
         rbMasculino.setOpaque(false);
         rbMasculino.setFont(font);
+        rbMasculino.setForeground(Color.WHITE);
+
         rbFeminino = new JRadioButton("Feminino");
         rbFeminino.setFont(font);
         rbFeminino.setOpaque(false);
+        rbFeminino.setForeground(Color.WHITE);
+
         bgGenero = new ButtonGroup();
+
         jlTelefone = new JLabel("Telefone");
         jlTelefone.setFont(font);
+        jlTelefone.setForeground(Color.WHITE);
+
         jlPeso = new JLabel("Peso");
         jlPeso.setFont(font);
+        jlPeso.setForeground(Color.WHITE);
+
         jtfNome = new JTextField();
+
         jtfPeso = new JFormattedTextField();
+
         jftTelefone = new JFormattedTextField(mascara);
+
         jlAltura = new JLabel("Altura");
         jlAltura.setFont(font);
+        jlAltura.setForeground(Color.WHITE);
+
         jtfAltura = new JFormattedTextField();
+
         jlAtividade = new JLabel("Atividades");
         jlAtividade.setFont(font);
+        jlAtividade.setForeground(Color.WHITE);
+
         comboAtividade = new JComboBox<>();
+
         btCadastrar = new Button("Cadastrar");
         btCadastrar.setFont(font);
+
 
 
         add(jlNome);
@@ -104,12 +126,18 @@ public class PainelEmagrecimento extends JPanel {
         jtfPeso.setBounds(60, 225, 150, 20);
         jlAltura.setBounds(60, 265, 100, 20);
         jtfAltura.setBounds(60, 285, 150, 20);
-        jlAtividade.setBounds(350,180,100,20);
-        comboAtividade.setBounds(350,210,170,20);
+        jlAtividade.setBounds(350, 180, 100, 20);
+        comboAtividade.setBounds(350, 210, 170, 20);
         jlSexo.setBounds(350, 80, 100, 20);
         rbMasculino.setBounds(350, 110, 100, 20);
         rbFeminino.setBounds(350, 140, 100, 20);
-        btCadastrar.setBounds(210,370,150,30);
+        btCadastrar.setBounds(210, 370, 150, 30);
+
+        //Colocando img
+        image = new ImageIcon(getClass().getResource("/img/background2.png"));
+        jlimage = new JLabel(image);
+        add(jlimage);
+        jlimage.setBounds(0, 0, 550, 550);
 
     }
 
@@ -125,17 +153,17 @@ public class PainelEmagrecimento extends JPanel {
                 nome = jtfNome.getText();
                 String tipoAtividade = (String) comboAtividade.getSelectedItem();
 
-                if (rbMasculino.isSelected()){
+                if (rbMasculino.isSelected()) {
                     sexo = "Masculino";
-                }else if (rbFeminino.isSelected()){
+                } else if (rbFeminino.isSelected()) {
                     sexo = "Feminino";
                 }
 
 
-                    TelaSpa.pacientes.add(new Emagrecimento(nome,sexo,telefone,tipoAtividade,peso,altura,calculoPeso));
-                    //TelaSpa.pacientes.forEach(emagrecimento-> System.out.println(emagrecimento.mostrarDados() + "\n"));
+                TelaSpa.pacientes.add(new Emagrecimento(nome, sexo, telefone, tipoAtividade, peso, altura, calculoPeso));
+                //TelaSpa.pacientes.forEach(emagrecimento-> System.out.println(emagrecimento.mostrarDados() + "\n"));
 
-                }
+            }
         });
 
     }

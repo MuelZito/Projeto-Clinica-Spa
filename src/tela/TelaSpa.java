@@ -19,7 +19,6 @@ public class TelaSpa extends JFrame {
     private JMenuItem jmiPesquisar, jmiMostrar, jmiAlterar, jmiRemover, jmiP_emagrecimento, jmiP_estetica;
     private ImageIcon image;
     private JLabel jlimage;
-    private CalculoPeso calculoPeso;
     public static Set<Paciente> pacientes = new HashSet<>();
 
     public TelaSpa(String title) throws HeadlessException {
@@ -29,7 +28,6 @@ public class TelaSpa extends JFrame {
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setLocationRelativeTo(getContentPane());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        calculoPeso = new CalculoPeso();
         iniciarComponentes();
         criarEventos();
     }
@@ -46,8 +44,7 @@ public class TelaSpa extends JFrame {
         jmiP_emagrecimento = new JMenuItem("Paciente Emagrecimento");
         jmiP_estetica = new JMenuItem("Paciente Estética");
         jbBarra.add(jmOpçoes);
-        jbBarra
-                .add(jmCadastrar);
+        jbBarra.add(jmCadastrar);
         jmOpçoes.add(jmiPesquisar);
         jmOpçoes.add(jmiMostrar);
         jmOpçoes.add(jmiAlterar);
@@ -68,7 +65,7 @@ public class TelaSpa extends JFrame {
         jmiP_emagrecimento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PainelEmagrecimento emagrecimento = new PainelEmagrecimento(calculoPeso);
+                PainelEmagrecimento emagrecimento = new PainelEmagrecimento();
                 getContentPane().removeAll();
                 getContentPane().add(emagrecimento);
                 getContentPane().validate();
@@ -116,8 +113,8 @@ public class TelaSpa extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nomePesquisado = JOptionPane.showInputDialog("Digite o nome a ser pesquisado");
-                for (Paciente paciente: pacientes){
-                    if (paciente.getNome().equals(nomePesquisado)){
+                for (Paciente paciente : pacientes) {
+                    if (paciente.getNome().equals(nomePesquisado)) {
                         System.out.println("acho" + paciente.mostrarDados());
                     }
                 }
@@ -126,8 +123,16 @@ public class TelaSpa extends JFrame {
         jmiAlterar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String nomePesquisado = JOptionPane.showInputDialog("Digite o nome a ser pesquisado");
+                for (Paciente paciente : pacientes) {
+                    if (paciente.getNome().equals(nomePesquisado)) {
+                        String atividade[] = {"Caminhada Bosque", "Nadar na Piscina", "Academia"};
+                        String opcaoEscolhida = (String) JOptionPane.showInputDialog(null, "Escolha uma Atividade:",
+                                "Caminhada", JOptionPane.QUESTION_MESSAGE, null, atividade, "Caminhada Bosque");
+                        paciente.setTipoAtividade(opcaoEscolhida);
 
-
+                    }
+                }
             }
         });
     }

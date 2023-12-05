@@ -15,12 +15,14 @@ import static tela.TelaSpa.pacientes;
 public class PainelMostrar extends JPanel {
     private JTextArea jtaCampo;
     private JButton btMostraEstetica, btMostrarEmagrecimento;
+    private ImageIcon image;
+    private JLabel jlimage;
 
     public PainelMostrar() {
         setSize(550, 550);
         setLayout(null);
-        Color cor = new Color(0x6495ED);
-        setBackground(cor);
+        //Color cor = new Color(0x556B2F);
+        //setBackground(cor);
         iniciarComponentes();
         criarEventos();
     }
@@ -38,14 +40,18 @@ public class PainelMostrar extends JPanel {
         btMostraEstetica.setBounds(150, 350, 100, 25);
         btMostrarEmagrecimento.setBounds(270,350,125,25);
 
-
+        //Colocando img
+        image = new ImageIcon(getClass().getResource("/img/background2.png"));
+        jlimage = new JLabel(image);
+        add(jlimage);
+        jlimage.setBounds(0,0,550,550);
     }
 
     private void criarEventos() {
         btMostraEstetica.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                jtaCampo.setText("**************************ESTÉTICA***************************" + "\n");
+                jtaCampo.setText("*****************************ESTÉTICA*****************************" + "\n");
 
                 for (Paciente paciente : pacientes) {
                     if (paciente instanceof Estetica) {
@@ -58,7 +64,7 @@ public class PainelMostrar extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                jtaCampo.setText("************************EMAGRECIMENTO************************" + "\n");
+                jtaCampo.setText("************************EMAGRECIMENTO**************************" + "\n");
                 for (Paciente paciente: pacientes) {
                     if (paciente instanceof Emagrecimento){
                         jtaCampo.append(paciente.mostrarDados());
