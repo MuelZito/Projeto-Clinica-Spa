@@ -103,20 +103,23 @@ public class TelaSpa extends JFrame {
                     if (paciente.getNome().equals(nomeDeletado)) {
                         pacientes.remove(paciente);
                         achou = true;
-                        JOptionPane.showMessageDialog(null, "REMOVIDO");
+                        JOptionPane.showMessageDialog(null, "PACIENTE REMOVIDO");
                     }
                 }
-                if (!achou) JOptionPane.showMessageDialog(null, "NAO ACHOU");
+                if (!achou) JOptionPane.showMessageDialog(null, "PACIENTE NÃO ENCONTRADO");
             }
         });
         jmiPesquisar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nomePesquisado = JOptionPane.showInputDialog("Digite o nome a ser pesquisado");
+                Boolean achou = false;
                 for (Paciente paciente : pacientes) {
                     if (paciente.getNome().equals(nomePesquisado)) {
-                        System.out.println("acho" + paciente.mostrarDados());
+                        JOptionPane.showMessageDialog(null,paciente.mostrarDados(),"Pesquisar",JOptionPane.INFORMATION_MESSAGE);
+                        achou = true;
                     }
+                    if (!achou) JOptionPane.showMessageDialog(null, "PACIENTE NÃO ENCONTRADO");
                 }
             }
         });
@@ -138,7 +141,7 @@ public class TelaSpa extends JFrame {
     }
 
     public static void main(String[] args) {
-        TelaSpa spa = new TelaSpa("SPA-LA-LA");
+        TelaSpa spa = new TelaSpa("SPA ElYSIUM");
         spa.setVisible(true);
 
     }

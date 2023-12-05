@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 
+import static tela.TelaSpa.pacientes;
+
 public class PainelEmagrecimento extends JPanel {
     private JLabel jlimage, jlNome, jlSexo, jlTelefone, jlPeso, jlAltura, jlAtividade;
     private ImageIcon image;
@@ -134,7 +136,7 @@ public class PainelEmagrecimento extends JPanel {
         btCadastrar.setBounds(210, 370, 150, 30);
 
         //Colocando img
-        image = new ImageIcon(getClass().getResource("/img/background2.png"));
+        image = new ImageIcon(getClass().getResource("/img/emagrecimento.png"));
         jlimage = new JLabel(image);
         add(jlimage);
         jlimage.setBounds(0, 0, 550, 550);
@@ -145,23 +147,25 @@ public class PainelEmagrecimento extends JPanel {
         btCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nome = jtfNome.getText();
-                String telefone = jftTelefone.getText();
-                String sexo = null;
-                double peso = Double.parseDouble(jtfPeso.getText());
-                double altura = Double.parseDouble(jtfAltura.getText());
-                nome = jtfNome.getText();
-                String tipoAtividade = (String) comboAtividade.getSelectedItem();
 
-                if (rbMasculino.isSelected()) {
-                    sexo = "Masculino";
-                } else if (rbFeminino.isSelected()) {
-                    sexo = "Feminino";
+                if (jtfNome.getText().isEmpty() && jftTelefone.getText().isEmpty() && rbFeminino.getText().isEmpty() || rbMasculino.getText().isEmpty() && jtfPeso.getText().isEmpty() && jtfAltura.getText().isEmpty()){
+                    String nome = jtfNome.getText();
+                    String telefone = jftTelefone.getText();
+                    String sexo = null;
+                    double peso = Double.parseDouble(jtfPeso.getText());
+                    double altura = Double.parseDouble(jtfAltura.getText());
+                    String tipoAtividade = (String) comboAtividade.getSelectedItem();
+
+                    if (rbMasculino.isSelected()) {
+                        sexo = "Masculino";
+                    } else if (rbFeminino.isSelected()) {
+                        sexo = "Feminino";
+                    }
+                    pacientes.add(new Emagrecimento(nome, sexo, telefone, tipoAtividade, peso, altura, calculoPeso));
+                    JOptionPane.showMessageDialog(null,"CADASTRADO");
+                }else {
+                    JOptionPane.showMessageDialog(null,"PREENCHA TODOS OS CAMPOS!","ERRO",JOptionPane.WARNING_MESSAGE);
                 }
-
-
-                TelaSpa.pacientes.add(new Emagrecimento(nome, sexo, telefone, tipoAtividade, peso, altura, calculoPeso));
-                //TelaSpa.pacientes.forEach(emagrecimento-> System.out.println(emagrecimento.mostrarDados() + "\n"));
 
             }
         });

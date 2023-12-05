@@ -1,7 +1,6 @@
 package paineis;
 
 import classes.Estetica;
-import classes.Paciente;
 import tela.TelaSpa;
 
 import javax.swing.*;
@@ -10,6 +9,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+
+import static tela.TelaSpa.pacientes;
 
 public class PainelEstetica extends JPanel {
     private JLabel jlimage,jlNome, jlTelefone, jlSexo, jlServicos;
@@ -50,12 +51,12 @@ public class PainelEstetica extends JPanel {
         rbMasculino = new JRadioButton("Masculino");
         rbMasculino.setOpaque(false);
         rbMasculino.setFont(font);
-        rbMasculino.setForeground(Color.WHITE); // Se aplicável, ajuste a cor do texto dos radio buttons
+        rbMasculino.setForeground(Color.WHITE);
 
         rbFeminino = new JRadioButton("Feminino");
         rbFeminino.setFont(font);
         rbFeminino.setOpaque(false);
-        rbFeminino.setForeground(Color.WHITE); // Se aplicável, ajuste a cor do texto dos radio buttons
+        rbFeminino.setForeground(Color.WHITE);
 
         bgGenero = new ButtonGroup();
         jtfNome = new JTextField();
@@ -88,9 +89,11 @@ public class PainelEstetica extends JPanel {
         add(comboServicos);
         comboServicos.addItem("Hidratação de pés e mãos");
         comboServicos.addItem("Banho de lua");
-        comboServicos.addItem("Limpeza de Pele");
-        comboServicos.addItem("Cuidar do Cabelo");
-        comboServicos.addItem("Massagem Esfoliante");
+        comboServicos.addItem("Limpeza de pele");
+        comboServicos.addItem("Cuidados para cabelo");
+        comboServicos.addItem("Massagem esfoliante");
+        comboServicos.addItem("Peeling");
+        comboServicos.addItem("Drenagem linfática");
         add(btCadastrar);
 
 
@@ -107,7 +110,7 @@ public class PainelEstetica extends JPanel {
 
 
         //Colocando img
-        image = new ImageIcon(getClass().getResource("/img/background2.png"));
+        image = new ImageIcon(getClass().getResource("/img/estetica.png"));
         jlimage = new JLabel(image);
         add(jlimage);
         jlimage.setBounds(0,0,550,550);
@@ -118,30 +121,24 @@ public class PainelEstetica extends JPanel {
         btCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nome = jtfNome.getText();
-                String sexo = null;
-                String telefone = jftTelefone.getText();
-                String servico =  (String) comboServicos.getSelectedItem();
+                if (jtfNome.getText().isEmpty() || jftTelefone.getText().isEmpty() || (!rbMasculino.isSelected() && !rbFeminino.isSelected())){
+                    String nome = jtfNome.getText();
+                    String sexo = null;
+                    String telefone = jftTelefone.getText();
+                    String servico =  (String) comboServicos.getSelectedItem();
 
-                if (rbMasculino.isSelected()){
-                    sexo = "Masculino";
-                }else {
-                    sexo = "Feminio";
+                    if (rbMasculino.isSelected()){
+                        sexo = "Masculino";
+                    }else {
+                        sexo = "Feminio";
+                    }
+                    pacientes.add(new Estetica(nome,sexo,telefone,servico));
+                }else{
+                    JOptionPane.showMessageDialog(null,"PREENCHA TODOS OS CAMPOS","ERRO",JOptionPane.WARNING_MESSAGE);
                 }
 
-                TelaSpa.pacientes.add(new Estetica(nome,sexo,telefone,servico));
-                //TelaSpa.pacientes.forEach(estetica -> System.out.println(estetica.mostrarDados()));
-//
-//                String nomeDigitado = JOptionPane.showInputDialog("DIGITE o nome para deletar");
-//                Boolean achou = false;
-//                for (Paciente paci:TelaSpa.pacientes) {
-//                    if (paci.getNome().equals(nomeDigitado)){
-//                        TelaSpa.pacientes.remove(paci);
-//                        achou = true;
-//                        JOptionPane.showMessageDialog(null,"REMOVIDO");
-//                    }
-//                }
-//                if (!achou)JOptionPane.showMessageDialog(null,"NAO ACHOU");
+
+
      }
         });
 
