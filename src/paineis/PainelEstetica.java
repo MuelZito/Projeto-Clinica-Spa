@@ -23,6 +23,7 @@ public class PainelEstetica extends JPanel {
     private JComboBox<String> comboServicos = new JComboBox<>();
     private Font font = font = new Font(Font.SANS_SERIF, Font.BOLD, 15);
 
+
     public PainelEstetica() {
         setSize(550, 550);
         setLayout(null);
@@ -121,18 +122,22 @@ public class PainelEstetica extends JPanel {
         btCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (jtfNome.getText().isEmpty() || jftTelefone.getText().isEmpty() || (!rbMasculino.isSelected() && !rbFeminino.isSelected())){
+                if (!(jtfNome.getText().isEmpty() || jftTelefone.getText().isEmpty() || !rbFeminino.isSelected() && !rbMasculino.isSelected())){
                     String nome = jtfNome.getText();
                     String sexo = null;
                     String telefone = jftTelefone.getText();
                     String servico =  (String) comboServicos.getSelectedItem();
 
+
                     if (rbMasculino.isSelected()){
                         sexo = "Masculino";
                     }else {
-                        sexo = "Feminio";
+                        sexo = "Feminino";
                     }
                     pacientes.add(new Estetica(nome,sexo,telefone,servico));
+                    JOptionPane.showMessageDialog(null,"CADASTRADO");
+                    jtfNome.setText("");
+                    jftTelefone.setText("");
                 }else{
                     JOptionPane.showMessageDialog(null,"PREENCHA TODOS OS CAMPOS","ERRO",JOptionPane.WARNING_MESSAGE);
                 }

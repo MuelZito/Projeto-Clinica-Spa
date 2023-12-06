@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ClinicaSpa:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ClinicaSpa_jar</output-path>
+    <root id="archive" name="ClinicaSpa.jar">
+      <element id="module-output" name="ClinicaSpa" />
+    </root>
+  </artifact>
+</component>

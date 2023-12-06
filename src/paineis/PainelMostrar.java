@@ -12,6 +12,7 @@ import static tela.TelaSpa.pacientes;
 
 public class PainelMostrar extends JPanel {
     private JTextArea jtaCampo;
+    private  JScrollPane jspBarra;
     private JButton btMostraEstetica, btMostrarEmagrecimento;
     private ImageIcon image;
     private JLabel jlimage;
@@ -27,14 +28,15 @@ public class PainelMostrar extends JPanel {
 
     private void iniciarComponentes() {
         jtaCampo = new JTextArea();
+        jspBarra = new JScrollPane(jtaCampo);
         btMostraEstetica = new JButton("Estética");
         btMostrarEmagrecimento = new JButton("Emagrecimento");
 
-        add(jtaCampo);
+        add(jspBarra);
         add(btMostraEstetica);
         add(btMostrarEmagrecimento);
 
-        jtaCampo.setBounds(90, 60, 350, 300);
+        jspBarra.setBounds(90, 60, 350, 300);
         btMostraEstetica.setBounds(150, 380, 100, 25);
         btMostrarEmagrecimento.setBounds(270,380,125,25);
 
@@ -50,31 +52,22 @@ public class PainelMostrar extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jtaCampo.setText("*****************************ESTÉTICA*****************************" + "\n");
-                if (pacientes.isEmpty()){
                     for (Paciente paciente : pacientes) {
                         if (paciente instanceof Estetica) {
-                            jtaCampo.append(paciente.mostrarDados());
+                            jtaCampo.append(paciente.mostrarDados() + "\n");
                         }
                     }
-                }else {
-                    JOptionPane.showMessageDialog(null,"NENHUM PACIENTE DE ESTÉTICA CADASTRADO","ERRO",JOptionPane.WARNING_MESSAGE);
-                }
-
             }
         });
         btMostrarEmagrecimento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jtaCampo.setText("************************EMAGRECIMENTO**************************" + "\n");
-                if (!pacientes.isEmpty()){
                     for (Paciente paciente: pacientes) {
                         if (paciente instanceof Emagrecimento) {
-                            jtaCampo.append(paciente.mostrarDados());
+                            jtaCampo.append(paciente.mostrarDados() + "\n" + "\n");
                         }
                     }
-                }else {
-                    JOptionPane.showMessageDialog(null,"NENHUM PACIENTE DE EMAGRACIMENTO CADASTRADO","ERRO",JOptionPane.WARNING_MESSAGE);
-                }
             }
         });
     }

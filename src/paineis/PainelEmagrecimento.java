@@ -148,7 +148,8 @@ public class PainelEmagrecimento extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if (jtfNome.getText().isEmpty() && jftTelefone.getText().isEmpty() && rbFeminino.getText().isEmpty() || rbMasculino.getText().isEmpty() && jtfPeso.getText().isEmpty() && jtfAltura.getText().isEmpty()){
+                if (!(jtfAltura.getText().isEmpty() || jtfNome.getText().isEmpty() || jtfPeso.getText().isEmpty() || jftTelefone.getText().isEmpty() ||
+                        !rbFeminino.isSelected() && !rbMasculino.isSelected())){
                     String nome = jtfNome.getText();
                     String telefone = jftTelefone.getText();
                     String sexo = null;
@@ -163,6 +164,10 @@ public class PainelEmagrecimento extends JPanel {
                     }
                     pacientes.add(new Emagrecimento(nome, sexo, telefone, tipoAtividade, peso, altura, calculoPeso));
                     JOptionPane.showMessageDialog(null,"CADASTRADO");
+                    jtfNome.setText("");
+                    jftTelefone.setText("");
+                    jtfPeso.setText("");
+                    jtfAltura.setText("");
                 }else {
                     JOptionPane.showMessageDialog(null,"PREENCHA TODOS OS CAMPOS!","ERRO",JOptionPane.WARNING_MESSAGE);
                 }

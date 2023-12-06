@@ -4,13 +4,13 @@ public class Paciente {
     protected String nome;
     protected String sexo;
     protected String telefone;
-    protected String TipoAtividade;
+    protected String tipoAtividade;
 
     public Paciente(String nome, String sexo, String telefone, String tipoAtividade) {
         this.nome = nome;
         this.sexo = sexo;
         this.telefone = telefone;
-        TipoAtividade = tipoAtividade;
+        this.tipoAtividade = tipoAtividade;
     }
     public String mostrarDados(){
         return null;
@@ -41,10 +41,10 @@ public class Paciente {
     }
 
     public String getTipoAtividade() {
-        return TipoAtividade;
+        return tipoAtividade;
     }
 
     public void setTipoAtividade(String tipoAtividade) {
-        TipoAtividade = tipoAtividade;
+        this.tipoAtividade = tipoAtividade;
     }
 }

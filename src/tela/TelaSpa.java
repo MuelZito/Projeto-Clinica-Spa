@@ -1,6 +1,7 @@
 package tela;
 
 import classes.CalculoPeso;
+import classes.Emagrecimento;
 import classes.Paciente;
 import paineis.PainelEmagrecimento;
 import paineis.PainelEstetica;
@@ -97,52 +98,67 @@ public class TelaSpa extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String nomeDeletado = JOptionPane.showInputDialog("DIGITE o nome para deletar");
+                String nomeDeletado = JOptionPane.showInputDialog(null, "DIGITE o nome do paciente para DELETAR",
+                        "Deletar Paciente", JOptionPane.INFORMATION_MESSAGE);
                 Boolean achou = false;
                 for (Paciente paciente : pacientes) {
                     if (paciente.getNome().equals(nomeDeletado)) {
                         pacientes.remove(paciente);
                         achou = true;
-                        JOptionPane.showMessageDialog(null, "PACIENTE REMOVIDO");
+                        JOptionPane.showMessageDialog(null, "Pacente Removido :)");
                     }
                 }
-                if (!achou) JOptionPane.showMessageDialog(null, "PACIENTE NÃO ENCONTRADO");
+                if (!achou) {
+                    JOptionPane.showMessageDialog(null, "Não foi possivel Deletar :(", "ERRO", JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
         jmiPesquisar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nomePesquisado = JOptionPane.showInputDialog("Digite o nome a ser pesquisado");
+                String nomePesquisado = JOptionPane.showInputDialog(null, "Digite o nome do paciente para pesquisar",
+                        "Pesquisar Paciente", JOptionPane.INFORMATION_MESSAGE);
                 Boolean achou = false;
                 for (Paciente paciente : pacientes) {
                     if (paciente.getNome().equals(nomePesquisado)) {
-                        JOptionPane.showMessageDialog(null,paciente.mostrarDados(),"Pesquisar",JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, paciente.mostrarDados(), "Pesquisar Paciente", JOptionPane.INFORMATION_MESSAGE);
                         achou = true;
                     }
-                    if (!achou) JOptionPane.showMessageDialog(null, "PACIENTE NÃO ENCONTRADO");
+
                 }
+                if (!achou) {
+                    JOptionPane.showMessageDialog(null, "PACIENTE NÃO ENCONTRADO :(", "ERRO", JOptionPane.WARNING_MESSAGE);
+                }
+
             }
         });
         jmiAlterar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nomePesquisado = JOptionPane.showInputDialog("Digite o nome a ser pesquisado");
-                for (Paciente paciente : pacientes) {
-                    if (paciente.getNome().equals(nomePesquisado)) {
-                        String atividade[] = {"Caminhada Bosque", "Nadar na Piscina", "Academia"};
-                        String opcaoEscolhida = (String) JOptionPane.showInputDialog(null, "Escolha uma Atividade:",
-                                "Caminhada", JOptionPane.QUESTION_MESSAGE, null, atividade, "Caminhada Bosque");
-                        paciente.setTipoAtividade(opcaoEscolhida);
+                String nomeAlterar = JOptionPane.showInputDialog(null, "DIGITE o nome do paciente para ALTERAR a atividade",
+                        "Alterar Paciente", JOptionPane.INFORMATION_MESSAGE);
 
+                boolean achou = false;
+
+                for (Paciente paciente : pacientes) {
+                    if (paciente instanceof Emagrecimento) {
+                        if (paciente.getNome().equals(nomeAlterar)) {
+                            String atividade[] = {"Caminhada Bosque", "Nadar na Piscina", "Academia"};
+                            String opcaoEscolhida = (String) JOptionPane.showInputDialog(null, "Escolha uma Atividade:",
+                                    "Caminhada", JOptionPane.QUESTION_MESSAGE, null, atividade, "Caminhada Bosque");
+                            paciente.setTipoAtividade(opcaoEscolhida);
+                            achou = true;
+                            break;
+                        }
                     }
                 }
+                if (!achou) {
+                    JOptionPane.showMessageDialog(null, "PACIENTE NÃO ENCONTRADO OU NÃO FAZ ATIVIDADE :(", "ERRO", JOptionPane.WARNING_MESSAGE);
+                }
+
             }
         });
     }
 
-    public static void main(String[] args) {
-        TelaSpa spa = new TelaSpa("SPA ElYSIUM");
-        spa.setVisible(true);
 
-    }
 }
